@@ -18,6 +18,7 @@ struct Motion {
 }
 
 if CommandLine.arguments.contains("--self-test") {
+    testMeetings()
     var m = Motion(); m.add(100, at: 0)
     var total = 0.0; var ended = false
     for i in 1...240 { let (d,e) = m.step(at: Double(i)/120); total += d; ended = ended || e }
@@ -33,6 +34,7 @@ final class WheelApp: NSObject, NSApplicationDelegate {
     var tap: CFMachPort?
     var source: CFRunLoopSource?
     var timer: Timer?
+    var meetings: Meetings?
     var item: NSStatusItem!
     var status: NSMenuItem!
     var motion = Motion()
@@ -71,6 +73,7 @@ final class WheelApp: NSObject, NSApplicationDelegate {
         let quit = NSMenuItem(title: "Quit CalendarWheel", action: #selector(quitApp), keyEquivalent: "q")
         quit.target = self; menu.addItem(quit)
         item.menu = menu
+        meetings = Meetings(item: item, menu: menu)
         observer = NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.didActivateApplicationNotification, object: nil, queue: .main) { [weak self] _ in
             self?.finish()
         }

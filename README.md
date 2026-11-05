@@ -1,6 +1,6 @@
 # CalendarWheel
 
-A small native Swift menu-bar app that makes a mouse’s horizontal wheel scroll smoothly in Apple Calendar.
+A small native Swift menu-bar app with upcoming Apple Calendar events, meeting shortcuts, and smooth horizontal mouse-wheel scrolling.
 
 Converts horizontal wheel input into continuous scroll events with companion trackpad gesture events, only while Calendar is frontmost. Vertical scrolling and existing trackpad gestures pass through. No network access, analytics, or third-party dependencies.
 
@@ -19,6 +19,16 @@ Enable **CalendarWheel** in **System Settings → Privacy & Security → Accessi
 For automatic startup, add the installed app under **System Settings → General → Login Items & Extensions → Open at Login**.
 
 Use the **↔︎** menu-bar icon to enable or disable conversion, open Accessibility settings, or quit. Test the horizontal wheel with the pointer over Calendar’s Week grid.
+
+## Upcoming meetings
+
+Grant CalendarWheel Full Calendar Access when prompted. EventKit requires that permission to read existing events; CalendarWheel never creates or modifies events and does not upload calendar data.
+
+The menu bar shows the next timed event within 24 hours with a countdown, or the time remaining for an ongoing event. All-day, cancelled, and declined events are excluded. Use **Calendars** in the menu to choose which calendars are included; this selection is independent of Apple Calendar’s sidebar checkboxes and is saved across launches. The display refreshes every 30 seconds, when events change, and after waking.
+
+**Join Meeting** opens a recognized conference link from the event URL, location, or notes. Supported services include Google Meet, Zoom, Microsoft Teams, Webex, Whereby, Jitsi Meet, GoToMeeting, and BlueJeans. Links open only when clicked. The **Next 24 hours** submenu also provides join actions for upcoming events. **Open Apple Calendar** opens the Calendar app.
+
+Requires macOS 14 or later for calendar access. Meeting titles are visible in the menu bar, including during screen sharing.
 
 ## Implementation
 
